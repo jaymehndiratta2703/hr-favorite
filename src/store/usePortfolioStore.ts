@@ -1,9 +1,11 @@
 import { create } from "zustand";
 import { serverRoutes } from "@/lib/contants";
-import { HeroType } from "portfolioui";
-import { ProjectsInfoType } from "@/components/recruitersdelight/project.types";
-import { SkillsSlidersType } from "@/components/recruitersdelight/skillsSliders.types";
-import { PersonalInfoType } from "@/components/recruitersdelight/personalInfo.types";
+import {
+  HeroType,
+  PersonalInfoType,
+  ProjectsTimelineInfoType,
+  SkillsSlidersType,
+} from "portfolioui/types";
 
 const initialPersonalState: PersonalInfoType = {
   displayName: "",
@@ -53,7 +55,7 @@ export interface PortfolioType {
   personalInfo: PersonalInfoType;
   heroInfo: HeroType;
   skillsInfo: SkillsSlidersType;
-  projectsInfo: ProjectsInfoType;
+  projectsInfo: ProjectsTimelineInfoType;
 }
 
 interface PortfolioStore {
@@ -63,7 +65,7 @@ interface PortfolioStore {
   savePortfolio: (x: PortfolioType) => void;
   savePersonalInfo: (x: PersonalInfoType) => void;
   saveHeroInfo: (x: HeroType) => void;
-  saveProjectsInfo: (x: ProjectsInfoType) => void;
+  saveProjectsInfo: (x: ProjectsTimelineInfoType) => void;
   saveSkillsInfo: (x: SkillsSlidersType) => void;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   updateState: (x: any) => void;
@@ -127,7 +129,7 @@ export const usePortfolioStore = create<PortfolioStore>((set, get) => ({
     } as PortfolioType);
   },
 
-  saveProjectsInfo: async (projectsInfo: ProjectsInfoType) => {
+  saveProjectsInfo: async (projectsInfo: ProjectsTimelineInfoType) => {
     const currentPortfolio = get().portfolio;
     await get().savePortfolio({
       ...currentPortfolio,
