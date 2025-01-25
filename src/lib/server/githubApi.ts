@@ -84,7 +84,10 @@ export const uploadFileInCDN = async (file: File) => {
       path: `images/${fileName}`,
       ref: branch,
     });
-    sha = existingFileData.data.sha;
+    if (Array.isArray(existingFileData.data)) {
+      throw new Error("Expected file data, but received an array");
+    }
+    sha = existingFileData.data?.sha;
   } catch (error) {
     console.log("🚀 ~ uploadFileInCDN ~ error:", error);
   }
